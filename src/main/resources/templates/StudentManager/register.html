@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        
+        .form-container {
+            margin-top: 50px;
+        }
+        
+        .form-box {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .custom-message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .message-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .message-error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .password-container {
+            position: relative;
+            display: flex; /* Sử dụng flexbox cho password container */
+            flex-direction: column; /* Đặt các phần tử theo cột */
+        }
+        
+        .password-input {
+            position: relative; /* Để tạo một vị trí tương đối cho icon */
+        }
+        
+        .password-input input {
+            padding-right: 45px; /* Dành khoảng trống cho icon */
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 10px; /* Căn chỉnh icon mắt sang bên phải */
+            top: 50%; /* Căn giữa theo chiều dọc */
+            transform: translateY(-50%); /* Đưa nó lên giữa */
+            cursor: pointer;
+            color: gray;
+            font-size: 18px; /* Điều chỉnh kích thước của icon */
+        }
+        
+        .toggle-password:hover {
+            color: black; /* Thay đổi màu icon khi hover */
+        }
+        
+        .password-error {
+            margin-top: 5px; /* Thêm khoảng cách cho thông báo lỗi */
+            font-size: 0.875rem; /* Kích thước chữ nhỏ hơn */
+            color: #dc3545; /* Màu đỏ cho thông báo lỗi */
+            height: 20px; /* Chiều cao cố định cho thông báo lỗi */
+            line-height: 1.2; /* Căn chỉnh văn bản trong chiều cao */
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container form-container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <!-- Register Form -->
+                <div class="form-box">
+                    <h3 class="text-center">Register</h3>
+                    <form th:action="@{/StudentManager/register.html}" th:object="${user}" method="post">
+                        <div class="mb-3">
+                            <label for="registerName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" th:field="*{username}" required
+                                placeholder="Enter your full name" />
+                            <div th:if="${#fields.hasErrors('username')}" class="text-danger"
+                                th:errors="*{username}"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" th:field="*{email}" placeholder="Enter your email">
+                            <div th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></div>
+                        </div>
+                        <div class="mb-3 password-container">
+                            <label for="registerPassword" class="form-label">Password</label>
+                            <div class="password-input">
+                                <input type="password" id="registerPassword" class="form-control" th:field="*{password}"
+                                    placeholder="Create a password">
+                                <div class="toggle-password" onclick="togglePassword()">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                            </div>
+                            <div th:if="${#fields.hasErrors('password')}" class="text-danger password-error"
+                                th:errors="*{password}"></div>
+                        </div>
+                                                            
+                        <button type="submit" class="btn btn-primary w-100">Register</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Already have an account? <a href="login.html">Login here</a></p>
+                    </div>
+                    <div th:if="${message != null}" class="custom-message" id="customMessage"
+                        th:classappend="${success} ? 'message-success' : 'message-error'">
+                        <span th:text="${message}"></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Tự động ẩn thông báo sau 5 giây
+        window.onload = function () {
+            let messageDiv = document.getElementById("customMessage");
+            if (messageDiv) {
+                setTimeout(function () {
+                    messageDiv.style.display = "none";
+                }, 5000); // 5000 ms = 5 giây
+            }
+        };
+
+        // Toggle password visibility
+        function togglePassword() {
+            const passwordInput = document.getElementById('registerPassword');
+            const toggleIcon = document.querySelector('.toggle-password i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

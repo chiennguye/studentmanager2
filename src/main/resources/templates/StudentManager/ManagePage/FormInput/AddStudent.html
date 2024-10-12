@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+            font-family: 'Arial', sans-serif;
+        }
+        .form-container {
+            margin: 100px auto; /* Giữa trang */
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        .form-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #343a40;
+            margin-bottom: 30px;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px); /* Hiệu ứng di chuyển lên */
+        }
+        .form-label {
+            font-weight: bold;
+            color: #495057;
+        }
+        .mb-3 input, .mb-3 select {
+            padding: 10px;
+            border-radius: 5px; /* Đường viền tròn */
+            border: 1px solid #ced4da;
+            transition: border 0.3s ease;
+        }
+        .mb-3 input:focus, .mb-3 select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-container">
+                    <h2 class="form-title">Add New Student</h2>
+                    <form th:action="@{/StudentManager/ManagePage/FormInput/AddStudent.html}" method="post" th:object="${student}">
+                        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+                            <p th:text="${errorMessage}"></p>
+                        </div>
+                        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+                            <p th:text="${successMessage}"></p>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="studentcode" class="form-label">Student Code:</label>
+                            <input type="text" class="form-control" id="studentcode" name="studentcode" th:value="*{studentcode}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastname" class="form-label">Last Name:</label>
+                            <input type="text" class="form-control" id="lastname" name="lastname" th:value="*{lastname}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstname" class="form-label">First Name:</label>
+                            <input type="text" class="form-control" id="firstname" name="firstname" th:value="*{firstname}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="dateofbirth" class="form-label">Date of Birth:</label>
+                            <input type="date" class="form-control" id="dateofbirth" name="dateofbirth" th:value="*{dateofbirth}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="gender" class="form-label">Gender:</label>
+                            <select class="form-control" id="gender" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="Male" th:selected="*{gender == 'Male'}">Male</option>
+                                <option value="Female" th:selected="*{gender == 'Female'}">Female</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address:</label>
+                            <input type="text" class="form-control" id="address" name="address" th:value="*{address}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phonenumber" class="form-label">Phone Number:</label>
+                            <input type="text" class="form-control" id="phonenumber" name="phonenumber" th:value="*{phonenumber}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="classId" class="form-label">Class ID:</label>
+                            <input type="number" class="form-control" id="classId" name="classId" th:value="*{classId}" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Student</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

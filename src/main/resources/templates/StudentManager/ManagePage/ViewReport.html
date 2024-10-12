@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System - ViewReport</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="../HomePage.html" onclick="window.location.href = '../HomePage.html'; return false;">Student Manager</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto d-flex align-items-center">
+                    <!-- Hiển thị tên người dùng và căn giữa -->
+                    <li class="nav-item">
+                       <a href ="login.html"> <span class="user-info" th:text="${username}"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">
+                            <b>Logout <i class="bi bi-box-arrow-right ms-2" style="position: relative; top: 1.2px;"></i></b> <!-- Dịch icon xuống 2px -->
+                        </a>
+                    </li>                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Layout with Sidebar and Content -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar (Left) -->
+            <div class="col-md-3 sidebar">
+                <h3><i class="bi bi-list"></i> Management</h3>
+                <a href="ManageStudent.html" class="nav-link" th:classappend="${page == 'ManageStudent'} ? 'active' : ''"><i class="bi bi-people-fill"></i> Manage Students</a>
+                <a href="ManageTeacher.html" class="nav-link" th:classappend="${page == 'ManageTeacher'} ? 'active' : ''"><i class="bi bi-person-fill"></i> Manage Teachers</a>
+                <a href="ManageCourse.html" class="nav-link" th:classappend="${page == 'ManageCourse'} ? 'active' : ''"><i class="bi bi-journal-bookmark-fill"></i> Manage Courses</a>
+                <a href="ViewReport.html" class="nav-link" th:classappend="${page == 'ViewReport'} ? 'active' : ''"><i class="bi bi-bar-chart-fill"></i> View Reports</a>
+                <a href="ManageGrade.html" class="nav-link" th:classappend="${page == 'ManageGrade'} ? 'active' : ''"><i class="bi bi-award-fill"></i> Manage Grades</a> <!-- Thêm chức năng Quản lý điểm -->
+                <a href="ManageClass.html" class="nav-link" th:classappend="${page == 'ManageClass'} ? 'active' : ''"><i class="bi bi-house-door-fill"></i> Manage Classes</a>
+                <a href="#"><i class="bi bi-gear"></i> Settings</a>
+            </div>
+
+            <!-- Main Content (Right) -->
+            <div class="col-md-9 main-content">
+                <h2>View Report</h2>
+                <p>Overview of student in here:</p>
+
+                <!-- Example Statistics Section -->
+                <!-- Example Table -->
+                <h3>Overview Chart</h3>
+                <canvas id="barChart" width="400" height="200"></canvas>
+
+                <script>
+                    // Dữ liệu mẫu cho biểu đồ cột
+                    var labels = ['Weak', 'Average', 'Good', 'Proficient', 'Excellent']; // Trục X
+                    var dataPoints = [10, 15, 12, 90, 25]; // Dữ liệu trục Y
+            
+                    // Khởi tạo biểu đồ cột
+                    var ctx = document.getElementById('barChart').getContext('2d');
+                    var barChart = new Chart(ctx, {
+                        type: 'bar', // Loại biểu đồ: bar
+                        data: {
+                            labels: labels, // Trục X: Các tháng
+                            datasets: [{
+                                label: 'Data Points',
+                                data: dataPoints, // Trục Y: Dữ liệu
+                                backgroundColor: 'rgba(75, 412, 12, 0.5)', // Màu của cột
+                                borderColor: 'rgba(25, 192, 192, 1)', // Màu viền cột
+                                borderWidth: 1 // Độ dày của viền
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true // Bắt đầu từ giá trị 0
+                                }
+                            }
+                        }
+                    });
+                </script>                
+               
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="text-center">
+        <div class="container">
+            <p>&copy; 2024 Student Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
