@@ -1,4 +1,4 @@
-package com.Studentmanager.reponsitory;
+package com.Studentmanager.repository;
 
 import com.Studentmanager.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

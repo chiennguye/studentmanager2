@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Student</title>
+    <title>Add Class</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -66,8 +66,8 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="form-container">
-                    <h2 class="form-title">Add New Student</h2>
-                    <form th:action="@{/StudentManager/ManagePage/FormInput/AddStudent}" method="post" th:object="${student}">
+                    <h2 class="form-title">Edit class here</h2>
+                    <form th:action="@{/StudentManager/ManagePage/FormInput/UpdateClass}" method="post" th:object="${class}">
                         <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
                             <p th:text="${errorMessage}"></p>
                         </div>
@@ -76,42 +76,23 @@
                         </div>
                     
                         <div class="mb-3">
-                            <label for="studentcode" class="form-label">Student Code:</label>
-                            <input type="text" class="form-control" id="studentcode" name="studentcode" th:value="*{studentcode}" required placeholder="Enter Student Code">
+                            <label for="classcode" class="form-label">Class Code:</label>
+                            <input type="text" class="form-control" id="studentcode" name="classcode" th:field="*{classcode}" required>
                         </div>
                         <div class="mb-3">
-                            <label for="lastname" class="form-label">Last Name:</label>
-                            <input type="text" class="form-control" id="lastname" name="lastname" th:value="*{lastname}" required placeholder="Enter Last Name">
+                            <label for="classname" class="form-label">Class Name:</label>
+                            <input type="text" class="form-control" id="classname" name="classname" th:field="*{classname}" required>
                         </div>
                         <div class="mb-3">
-                            <label for="firstname" class="form-label">First Name:</label>
-                            <input type="text" class="form-control" id="firstname" name="firstname" th:value="*{firstname}" required placeholder="Enter Last Name">
+                            <label for="teacherId" class="form-label">Teacher Id:</label>
+                            <input type="number" class="form-control" id="teacherId" name="teacherId" th:field="*{teacherId}" required>
                         </div>
                         <div class="mb-3">
-                            <label for="dateofbirth" class="form-label">Date of Birth:</label>
-                            <input type="date" class="form-control" id="dateofbirth" name="dateofbirth" th:value="*{dateofbirth}" required >
+                            <label for="startdate" class="form-label">Start Date:</label>
+                            <input type="date" class="form-control" id="startdate" name="startdate" th:field="*{startdate}" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="gender" class="form-label">Gender:</label>
-                            <select class="form-control" id="gender" name="gender" required>
-                                <option value="">Select Gender</option>
-                                <option value="Male" th:selected="*{gender == 'Male'}">Male</option>
-                                <option value="Female" th:selected="*{gender == 'Female'}">Female</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Address:</label>
-                            <input type="text" class="form-control" id="address" name="address" th:value="*{address}" required placeholder="Enter address">
-                        </div>
-                        <div class="mb-3">
-                            <label for="phonenumber" class="form-label">Phone Number:</label>
-                            <input type="text" class="form-control" id="phonenumber" name="phonenumber" th:value="*{phonenumber}" required placeholder="Enter phone number">
-                        </div>
-                        <div class="mb-3">
-                            <label for="classEntity" class="form-label">Class ID:</label>
-                            <input type="number" class="form-control" id="classEntity" name="classEntity" th:value="*{classEntity}" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Add Student</button>
+                      
+                        <button type="submit" class="btn btn-primary">Update class</button>
                     </form>
                     
                 </div>

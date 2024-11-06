@@ -33,6 +33,7 @@
             </div>
         </div>
     </nav>
+    
 
     <!-- Main Layout with Sidebar and Content -->
     <div class="container-fluid">
@@ -40,12 +41,11 @@
             <!-- Sidebar (Left) -->
             <div class="col-md-3 sidebar">
                 <h3><i class="bi bi-list"></i> Management</h3>
-                <a href="ManageStudent.html" class="nav-link" th:classappend="${page == 'ManageStudent'} ? 'active' : ''"><i class="bi bi-people-fill"></i> Manage Students</a>
-                <a href="ManageTeacher.html" class="nav-link" th:classappend="${page == 'ManageTeacher'} ? 'active' : ''"><i class="bi bi-person-fill"></i> Manage Teachers</a>
-                <a href="ManageCourse.html" class="nav-link" th:classappend="${page == 'ManageCourse'} ? 'active' : ''"><i class="bi bi-journal-bookmark-fill"></i> Manage Courses</a>
-                <a href="ViewReport.html" class="nav-link" th:classappend="${page == 'ViewReport'} ? 'active' : ''"><i class="bi bi-bar-chart-fill"></i> View Reports</a>
-                <a href="ManageGrade.html" class="nav-link" th:classappend="${page == 'ManageGrade'} ? 'active' : ''"><i class="bi bi-award-fill"></i> Manage Grades</a> <!-- Thêm chức năng Quản lý điểm -->
-                <a href="ManageClass.html" class="nav-link" th:classappend="${page == 'ManageClass'} ? 'active' : ''"><i class="bi bi-house-door-fill"></i> Manage Classes</a>
+                <a href="ManageStudent" class="nav-link" th:classappend="${page == 'ManageStudent'} ? 'active' : ''"><i class="bi bi-people-fill"></i> Manage Students</a>
+                <a href="ManageTeacher" class="nav-link" th:classappend="${page == 'ManageTeacher'} ? 'active' : ''"><i class="bi bi-person-fill"></i> Manage Teachers</a>
+                <a href="ManageCourse" class="nav-link" th:classappend="${page == 'ManageCourse'} ? 'active' : ''"><i class="bi bi-journal-bookmark-fill"></i> Manage Courses</a>
+                <a href="ManageGrade" class="nav-link" th:classappend="${page == 'ManageGrade'} ? 'active' : ''"><i class="bi bi-award-fill"></i> Manage Grades</a> <!-- Thêm chức năng Quản lý điểm -->
+                <a href="ManageClass" class="nav-link" th:classappend="${page == 'ManageClass'} ? 'active' : ''"><i class="bi bi-house-door-fill"></i> Manage Classes</a>
                 <a href="#"><i class="bi bi-gear"></i> Settings</a>
             </div>
 
@@ -55,11 +55,17 @@
                 <p>Manage your course in here:</p>
 
                 <!-- Example Statistics Section -->
+                <div class="d-flex justify-content-between align-items-center mb-3">                  
+                    <div>
+                        <button class="btn btn-primary" onclick="window.location.href = 'FormInput/AddCourse';"> <i class="bi bi-plus"></i> Add Course</button>
+                    </div>
+                </div>
                 <!-- Example Table -->
                 <h3>List Course</h3>
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th>STT</th>
                             <th>id</th>
                             <th>Course_code</th>
                             <th>Course_name</th>
@@ -67,66 +73,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>16</td>
-                            <td>10</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jane Smith</td>
-                            <td>17</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                        </tr>
+                        <tr th:each="course,stat:${courses}">
+                            <td th:text="${stat.index+1}"></td>
+                            <td th:text="${course.id}"></td>
+                            <td th:text="${course.coursecode}"></td>
+                            <td th:text="${course.coursename}">16</td>
+                            <td>
+                                <a href="#"><i class="bi bi-pencil text-success"></i></a>
+                            </td>
+                        </tr>                                     
                     </tbody>
                 </table>
             </div>

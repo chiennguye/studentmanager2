@@ -1,7 +1,7 @@
 package com.Studentmanager.Controller;
 
 import com.Studentmanager.Model.User;
-import com.Studentmanager.reponsitory.UserRepository;
+import com.Studentmanager.repository.UserRepository;
 import com.Studentmanager.service.UserService;
 import jakarta.validation.Valid;
 
@@ -51,49 +51,7 @@ public class AuthController {
         return "StudentManager/register"; // Trả về view đăng ký cùng với thông điệp
     }
 
-    @GetMapping("ManagePage/ManageTeacher.html")
-    public String manageTeacher(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName(); // Đây là email người dùng đã đăng nhập
-
-        // Lấy thông tin người dùng từ DB
-        User user = userRepository.findByEmail(email); // Tìm người dùng theo email
-        if (user != null) {
-            model.addAttribute("username", user.getUsername()); // Thêm username vào model
-        }
-        model.addAttribute("page", "ManageTeacher");
-        return "StudentManager/ManagePage/ManageTeacher";
-    }
-
-    @GetMapping("ManagePage/ManageClass.html")
-    public String manageClass(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName(); // Đây là email người dùng đã đăng nhập
-
-        // Lấy thông tin người dùng từ DB
-        User user = userRepository.findByEmail(email); // Tìm người dùng theo email
-        if (user != null) {
-            model.addAttribute("username", user.getUsername()); // Thêm username vào model
-        }
-        model.addAttribute("page", "ManageClass");
-        return "StudentManager/ManagePage/ManageClass";
-    }
-
-    @GetMapping("ManagePage/ManageGrade.html")
-    public String managegrade(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName(); // Đây là email người dùng đã đăng nhập
-
-        // Lấy thông tin người dùng từ DB
-        User user = userRepository.findByEmail(email); // Tìm người dùng theo email
-        if (user != null) {
-            model.addAttribute("username", user.getUsername()); // Thêm username vào model
-        }
-        model.addAttribute("page", "ManageGrade");
-        return "StudentManager/ManagePage/ManageGrade";
-    }
-
-    @GetMapping("ManagePage/ViewReport.html")
+    @GetMapping("ManagePage/ViewReport")
     public String viewreport(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName(); // Đây là email người dùng đã đăng nhập
@@ -105,20 +63,6 @@ public class AuthController {
         }
         model.addAttribute("page", "ViewReport");
         return "StudentManager/ManagePage/ViewReport";
-    }
-
-    @GetMapping("ManagePage/ManageCourse.html")
-    public String manageCourse(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName(); // Đây là email người dùng đã đăng nhập
-
-        // Lấy thông tin người dùng từ DB
-        User user = userRepository.findByEmail(email); // Tìm người dùng theo email
-        if (user != null) {
-            model.addAttribute("username", user.getUsername()); // Thêm username vào model
-        }
-        model.addAttribute("page", "ManageCourse");
-        return "StudentManager/ManagePage/ManageCourse";
     }
 
 }

@@ -1,7 +1,13 @@
 package com.Studentmanager.Controller;
 
 import com.Studentmanager.Model.User; // Đảm bảo bạn đã import model User
-import com.Studentmanager.reponsitory.UserRepository; // Import UserRepository
+import com.Studentmanager.repository.UserRepository; // Import UserRepository
+import com.Studentmanager.service.CourseService;
+import com.Studentmanager.service.StudentService;
+import com.Studentmanager.service.TeacherService;
+
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +22,15 @@ public class HomeController {
 
     @Autowired
     private UserRepository userRepository; // Tiêm UserRepository
+
+    @Autowired
+    private StudentService studentService;
+
+    @Autowired
+    private TeacherService teacherService;
+
+    @Autowired
+    private CourseService courseService;
 
     @GetMapping("/HomePage.html")
     public String home(Model model) {
@@ -34,6 +49,15 @@ public class HomeController {
         } else {
             model.addAttribute("username", "Người dùng không tồn tại"); // Xử lý nếu không tìm thấy
         }
+
+        long totalStudents = studentService.getTotalStudents();
+        model.addAttribute("totalStudents", totalStudents);
+        long totalTeachers = teacherService.getTotalTeacher();
+        model.addAttribute("totalTeachers", totalTeachers);
+        long totalCourses = courseService.getTotalSourses();
+        model.addAttribute("totalCourses", totalCourses);
+        Map<String, Long> gradeClassification = studentService.getStudentCountByClassification();
+        model.addAttribute("gradeClassification", gradeClassification);
 
         return "StudentManager/HomePage"; // Trả về tên file HTML mà bạn muốn hiển thị
     }

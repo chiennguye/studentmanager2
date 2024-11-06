@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.Studentmanager.Model.User;
-import com.Studentmanager.reponsitory.UserRepository;
+import com.Studentmanager.repository.UserRepository;
 
 import java.util.Collections;
 

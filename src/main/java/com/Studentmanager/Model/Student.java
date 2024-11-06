@@ -1,6 +1,9 @@
 package com.Studentmanager.Model;
 
 import java.time.LocalDate; // Sử dụng java.time.LocalDate thay vì Joda-Time
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -8,6 +11,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,6 +32,7 @@ public class Student {
     private String firstname;
 
     @Column(name = "date_of_birth")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateofbirth; // Sử dụng java.time.LocalDate
 
     @Enumerated(EnumType.STRING)
@@ -39,8 +45,9 @@ public class Student {
     @Column(name = "phone_number")
     private String phonenumber;
 
-    @Column(name = "class_id")
-    private long classId;
+    @ManyToOne
+    @JoinColumn(name = "class_id")
+    private ClassEntity classEntity;
 
     // Getters và Setters
 
@@ -108,12 +115,12 @@ public class Student {
         this.phonenumber = phonenumber;
     }
 
-    public long getClassId() {
-        return classId;
+    public ClassEntity getClassEntity() {
+        return classEntity;
     }
 
-    public void setClassId(long classId) {
-        this.classId = classId;
+    public void setClassEntity(ClassEntity classEntity) {
+        this.classEntity = classEntity;
     }
 
     @Override
@@ -127,7 +134,7 @@ public class Student {
                 ", gender=" + gender +
                 ", address='" + address + '\'' +
                 ", phonenumber='" + phonenumber + '\'' +
-                ", classId=" + classId +
+                ", classEntity=" + classEntity +
                 '}';
     }
 }

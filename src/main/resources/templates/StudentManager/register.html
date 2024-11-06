@@ -81,14 +81,14 @@
 
 </head>
 
-<body>
+<body class="bg-dark bg-opacity-10">
 
-    <div class="container form-container">
-        <div class="row">
+    <div class="container form-container" >
+        <div class="row ">
             <div class="col-md-6 offset-md-3">
                 <!-- Register Form -->
-                <div class="form-box">
-                    <h3 class="text-center">Register</h3>
+                <div class="form-box " >
+                    <h3 class="text-center">Register an account</h3>
                     <form th:action="@{/StudentManager/register.html}" th:object="${user}" method="post">
                         <div class="mb-3">
                             <label for="registerName" class="form-label">Full Name</label>
@@ -115,7 +115,7 @@
                                 th:errors="*{password}"></div>
                         </div>
                                                             
-                        <button type="submit" class="btn btn-primary w-100">Register</button>
+                        <button type="submit" class="btn btn-primary w-100 rounded-pill">Register</button>
                     </form>
                     <div class="text-center mt-3">
                         <p>Already have an account? <a href="login.html">Login here</a></p>

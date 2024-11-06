@@ -1,7 +1,7 @@
 package com.Studentmanager.service;
 
 import com.Studentmanager.Model.User;
-import com.Studentmanager.reponsitory.UserRepository;
+import com.Studentmanager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

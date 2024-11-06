@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management System - ManageTeacher</title>
+    <title>Student Management System - Manage Class</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -40,35 +40,35 @@
             <!-- Sidebar (Left) -->
             <div class="col-md-3 sidebar">
                 <h3><i class="bi bi-list"></i> Management</h3>
-                <a href="ManageStudent.html" class="nav-link" th:classappend="${page == 'ManageStudent'} ? 'active' : ''"><i class="bi bi-people-fill"></i> Manage Students</a>
-                <a href="ManageTeacher.html" class="nav-link" th:classappend="${page == 'ManageTeacher'} ? 'active' : ''"><i class="bi bi-person-fill"></i> Manage Teachers</a>
-                <a href="ManageCourse.html" class="nav-link" th:classappend="${page == 'ManageCourse'} ? 'active' : ''"><i class="bi bi-journal-bookmark-fill"></i> Manage Courses</a>
-                <a href="ViewReport.html" class="nav-link" th:classappend="${page == 'ViewReport'} ? 'active' : ''"><i class="bi bi-bar-chart-fill"></i> View Reports</a>
-                <a href="ManageGrade.html" class="nav-link" th:classappend="${page == 'ManageGrade'} ? 'active' : ''"><i class="bi bi-award-fill"></i> Manage Grades</a> <!-- Thêm chức năng Quản lý điểm -->
-                <a href="ManageClass.html" class="nav-link" th:classappend="${page == 'ManageClass'} ? 'active' : ''"><i class="bi bi-house-door-fill"></i> Manage Classes</a>
+                <a href="ManageStudent" class="nav-link" th:classappend="${page == 'ManageStudent'} ? 'active' : ''"><i class="bi bi-people-fill"></i> Manage Students</a>
+                <a href="ManageTeacher" class="nav-link" th:classappend="${page == 'ManageTeacher'} ? 'active' : ''"><i class="bi bi-person-fill"></i> Manage Teachers</a>
+                <a href="ManageCourse" class="nav-link" th:classappend="${page == 'ManageCourse'} ? 'active' : ''"><i class="bi bi-journal-bookmark-fill"></i> Manage Courses</a>
+                <a href="ManageGrade" class="nav-link" th:classappend="${page == 'ManageGrade'} ? 'active' : ''"><i class="bi bi-award-fill"></i> Manage Grades</a> <!-- Thêm chức năng Quản lý điểm -->
+                <a href="ManageClass" class="nav-link" th:classappend="${page == 'ManageClass'} ? 'active' : ''"><i class="bi bi-house-door-fill"></i> Manage Classes</a>
                 <a href="#"><i class="bi bi-gear"></i> Settings</a>
             </div>
 
             <!-- Main Content (Right) -->
             <div class="col-md-9 main-content">
                 <h2>Manage Teacher</h2>
-                <p>Manage teachers in here:</p>
+                <p>Manage teacher in here:</p>
 
                 <!-- Example Statistics Section -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control searchInput" placeholder="Search Student" id="searchInput">
-                        <button class="btn btn-primary" id="searchButton">Search</button>
+                        <input type="text" class="form-control " placeholder="Search Teacher" id="searchInput" name="keyword">
+                        <button class="btn btn-primary" type="button"  id="searchButton">Search</button>
                     </div>
                     <div>
-                        <button class="btn btn-primary" onclick="addStudent()">Add Student</button>
+                        <button class="btn btn-primary" onclick="window.location.href = 'FormInput/AddTeacher';"> <i class="bi bi-plus"></i>Add Teacher</button>
                     </div>
                 </div>
                 <!-- Example Table -->
-                <h3>List of Teachers</h3>
-                <table class="table table-striped">
+                <h3>List of Teacher</h3> 
+                <table class="table table-striped" >
                     <thead>
                         <tr>
+                            <th>STT</th>
                             <th>id</th>
                             <th>Teacher_code</th>
                             <th>Last_name</th>
@@ -79,138 +79,26 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>16</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>
-                                <button class="btn btn-warning" onclick="editStudent(1)">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteStudent(1)">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jane Smith</td>
-                            <td>17</td>
-                            <td>11</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>
-                                <button class="btn btn-warning" onclick="editStudent(1)">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteStudent(1)">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>
-                                <button class="btn btn-warning" onclick="editStudent(1)">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteStudent(1)">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>
-                                <button class="btn btn-warning" onclick="editStudent(1)">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteStudent(1)">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>
-                                <button class="btn btn-warning" onclick="editStudent(1)">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteStudent(1)">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>
-                                <button class="btn btn-warning" onclick="editStudent(1)">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteStudent(1)">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>
-                                <button class="btn btn-warning" onclick="editStudent(1)">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteStudent(1)">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>
-                                <button class="btn btn-warning" onclick="editStudent(1)">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteStudent(1)">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>
-                                <button class="btn btn-warning" onclick="editStudent(1)">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteStudent(1)">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bob Johnson</td>
-                            <td>18</td>
-                            <td>12</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>
-                                <button class="btn btn-warning" onclick="editStudent(1)">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteStudent(1)">Delete</button>
-                            </td>
-                        </tr>
+                <div th:fragment="teacherTableBody" >    
+                    <tbody id="teacherTableBody">
+                            <tr th:each="teacher,stat : ${teachers}">
+                                <td th:text="${stat.index+1}"></td>
+                                <td th:text="${teacher.id}"></td>
+                                <td th:text="${teacher.teachercode}"></td>
+                                <td th:text="${teacher.lastname}"></td>
+                                <td th:text="${teacher.firstname}"></td>
+                                <td th:text="${teacher.email}"></td>
+                                <td th:text="${teacher.numberphone}"></td>
+                                <td th:text="${teacher.address}"></td>
+                                <td>
+                                    <a  th:href="@{FormInput/EditTeacher(id=${teacher.id})}" ><i class="bi bi-pencil text-success"></i></a>
+                                    <form th:action="@{/StudentManager/ManagePage/DeleteTeacher/{id}(id=${teacher.id})}" method="post" style="display:inline;">
+                                        <button type="submit" class="no-border" onclick="return confirm('Are you really want to delete this teacher?');"><i class="bi bi-trash text-danger"></i></button>
+                                    </form>
+                                </td>
+                            </tr>                                                                
                     </tbody>
+                </div>    
                 </table>
             </div>
         </div>
@@ -225,5 +113,23 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#searchButton').on('click', function() {
+                var keyword = $('#searchInput').val();
+                $.ajax({
+                    url: 'ManageTeacher/search',
+                    data: { keyword: $('#searchInput').val() },
+                    success: function(data) {
+                        $('#teacherTableBody').html(data); // Cập nhật đúng phần tbody với dữ liệu trả về
+                    },
+                    error: function() {
+                        console.error("Lỗi khi tải dữ liệu");
+                    }
+                });
+            });
+        });              
+    </script>
 </body>
 </html>

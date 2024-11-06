@@ -1,7 +1,7 @@
 package com.Studentmanager;
 
-import com.Studentmanager.Model.Student;
-import com.Studentmanager.reponsitory.StudentRepository;
+import com.Studentmanager.Model.ClassEntity;
+import com.Studentmanager.repository.ClassRepository;
 import java.sql.Connection;
 import java.util.List;
 import javax.sql.DataSource;
@@ -16,7 +16,7 @@ public class StudentmanagerApplication implements CommandLineRunner {
     @Autowired
     private DataSource dataSource;
     @Autowired
-    private StudentRepository studentRepository; // Inject UserRepository
+    private ClassRepository classRepository; // Inject UserRepository
 
     public static void main(String[] args) {
         SpringApplication.run(StudentmanagerApplication.class, args);
@@ -36,14 +36,14 @@ public class StudentmanagerApplication implements CommandLineRunner {
         }
 
         // Lấy tất cả người dùng từ cơ sở dữ liệu
-        List<Student> student = studentRepository.findAll();
+        List<ClassEntity> classes = classRepository.findAll();
 
         // Kiểm tra và in ra danh sách người dùng
-        if (student.isEmpty()) {
+        if (classes.isEmpty()) {
             System.out.println("Không có người dùng nào trong cơ sở dữ liệu.");
         } else {
             System.out.println("Danh sách người dùng:");
-            student.forEach(std -> System.out.println(std));
+            classes.forEach(std -> System.out.println(std));
         }
     }
 

@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
+
 </head>
 <body>
 
@@ -39,12 +40,11 @@
             <!-- Sidebar (Left) -->
             <div class="col-md-3 sidebar">
                 <h3><i class="bi bi-list"></i> Management</h3>
-                <a href="ManageStudent.html" class="nav-link" th:classappend="${page == 'ManageStudent'} ? 'active' : ''"><i class="bi bi-people-fill"></i> Manage Students</a>
-                <a href="ManageTeacher.html" class="nav-link" th:classappend="${page == 'ManageTeacher'} ? 'active' : ''"><i class="bi bi-person-fill"></i> Manage Teachers</a>
-                <a href="ManageCourse.html" class="nav-link" th:classappend="${page == 'ManageCourse'} ? 'active' : ''"><i class="bi bi-journal-bookmark-fill"></i> Manage Courses</a>
-                <a href="ViewReport.html" class="nav-link" th:classappend="${page == 'ViewReport'} ? 'active' : ''"><i class="bi bi-bar-chart-fill"></i> View Reports</a>
-                <a href="ManageGrade.html" class="nav-link" th:classappend="${page == 'ManageGrade'} ? 'active' : ''"><i class="bi bi-award-fill"></i> Manage Grades</a>
-                <a href="ManageClass.html" class="nav-link" th:classappend="${page == 'ManageClass'} ? 'active' : ''"><i class="bi bi-house-door-fill"></i> Manage Classes</a>
+                <a href="ManageStudent" class="nav-link" th:classappend="${page == 'ManageStudent'} ? 'active' : ''"><i class="bi bi-people-fill"></i> Manage Students</a>
+                <a href="ManageTeacher" class="nav-link" th:classappend="${page == 'ManageTeacher'} ? 'active' : ''"><i class="bi bi-person-fill"></i> Manage Teachers</a>
+                <a href="ManageCourse" class="nav-link" th:classappend="${page == 'ManageCourse'} ? 'active' : ''"><i class="bi bi-journal-bookmark-fill"></i> Manage Courses</a>
+                <a href="ManageGrade" class="nav-link" th:classappend="${page == 'ManageGrade'} ? 'active' : ''"><i class="bi bi-award-fill"></i> Manage Grades</a>
+                <a href="ManageClass" class="nav-link" th:classappend="${page == 'ManageClass'} ? 'active' : ''"><i class="bi bi-house-door-fill"></i> Manage Classes</a>
                 <a href="#"><i class="bi bi-gear"></i> Settings</a>
             </div>
 
@@ -60,15 +60,17 @@
                         <button class="btn btn-primary" type="button" id="searchButton">Search</button>
                     </div>
                     <div>
-                        <button class="btn btn-primary" onclick="window.location.href = 'FormInput/AddStudent.html';">Add Student</button>
+                        <button class="btn btn-primary" onclick="window.location.href = 'FormInput/AddStudent';"> <i class="bi bi-plus"></i> Add Student</button>
                     </div>
                 </div>
 
                 <!-- Example Table -->
                 <h3>List of Students</h3>
-                    <table class="table table-striped">
+                <div class="table-responsive">
+                    <table class="table table-striped" >
                         <thead>
                             <tr>
+                                <th>STT</th>
                                 <th>id</th>
                                 <th>Student_code</th>
                                 <th>Last_name</th>
@@ -83,7 +85,8 @@
                         </thead>
                     <div th:fragment="studentTableBody">     
                         <tbody id="studentTableBody"  >
-                            <tr th:each="student : ${students}">
+                            <tr th:each="student,stat  : ${students}">
+                                <td th:text="${stat.index + 1}"></td>
                                 <td th:text="${student.id}"></td>
                                 <td th:text="${student.studentcode}"></td>
                                 <td th:text="${student.lastname}"></td>
@@ -92,17 +95,18 @@
                                 <td th:text="${student.gender}"></td>
                                 <td th:text="${student.address}"></td>
                                 <td th:text="${student.phonenumber}"></td>
-                                <td th:text="${student.classId}"></td>
+                                <td th:text="${student.classEntity.id}"></td>
                                 <td>
-                                    <a th:href="@{FormInput/EditStudent.html(id=${student.id})}" class="btn btn-warning">Edit</a>
+                                    <a th:href="@{FormInput/EditStudent(id=${student.id})}" ><i class="bi bi-pencil text-success"></i></a>
                                     <form th:action="@{/StudentManager/ManagePage/DeleteStudent/{id}(id=${student.id})}" method="post" style="display:inline;">
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you really want to delete this student?');">Delete</button>
+                                        <button type="submit" class="no-border" onclick="return confirm('Are you really want to delete this student?');"> <i class="bi bi-trash text-danger"></i></button>
                                     </form>
                                 </td>
                             </tr>
                         </tbody>
                     </div>
                     </table>
+                </div>
             </div>
         </div>
     </div>
@@ -132,9 +136,7 @@
                     }
                 });
             });
-        });
-        
-        
+        });              
     </script>
 </body>
 </html>
